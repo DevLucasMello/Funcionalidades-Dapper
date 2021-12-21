@@ -1,6 +1,5 @@
 ﻿using Aplicacao.Dapper.Models;
-using Aplicacao.Dapper.Screens.TagScreens;
-using Dapper.Contrib.Extensions;
+using Aplicacao.Dapper.Repositories;
 using System;
 using System.Data.SqlClient;
 
@@ -11,8 +10,19 @@ namespace Aplicacao.Dapper
         private const string CONNECTION_STRING = "Server=localhost;Database=Blog;User ID=sa; Password=Lm@18792;Trusted_Connection=True;MultipleActiveResultSets=true";
         static void Main(string[] args)
         {
-            ReadUsers();
+            var connection = new SqlConnection(CONNECTION_STRING);
+            connection.Open();
             
+            ReadUsers(connection);
+            ReadRoles(connection);
+            ReadTag(connection);
+            //ReadUser();
+            //CreateUser();
+            //UpdateUser();
+            //DeleteUser();
+
+            connection.Close();
+
             //var connection = new SqlConnection(CONNECTION_STRING);
             //connection.Open();
 
@@ -49,17 +59,93 @@ namespace Aplicacao.Dapper
         //    }
         //}
 
-        private static void ReadUsers() 
+        private static void ReadUsers(SqlConnection connection) 
         {
-            using (var connection = new SqlConnection(CONNECTION_STRING))
-            {
-                var users = connection.GetAll<User>();
-
-                foreach (var user in users)
-                {
-                    Console.WriteLine(user.Name);
-                }
-            }
+            var repository = new Repository<User>(connection);
+            var items = repository.Get();
+           
+            foreach (var item in items)            
+                Console.WriteLine(item.Name);           
         }
+
+        private static void ReadRoles(SqlConnection connection)
+        {
+            var repository = new Repository<Role>(connection);
+            var items = repository.Get();
+
+            foreach (var item in items)
+                Console.WriteLine(item.Name);
+        }
+
+        private static void ReadTag(SqlConnection connection)
+        {
+            var repository = new Repository<Tag>(connection);
+            var items = repository.Get();
+
+            foreach (var item in items)
+                Console.WriteLine(item.Name);
+        }
+
+        //private static void ReadUser()
+        //{
+        //    using (var connection = new SqlConnection(CONNECTION_STRING))
+        //    {
+        //        var user = connection.Get<User>(1);
+
+        //        Console.WriteLine(user.Name);                
+        //    }
+        //}
+
+        //private static void CreateUser()
+        //{
+        //    var user = new User()
+        //    {
+        //        Bio = "Lucas Santos",
+        //        Email = "lucasdemello.18@gmail.com",
+        //        Image = "https://...",
+        //        Name = "Lucas Santos",
+        //        PasswordHash = "HASH",
+        //        Slug = "lucas-web"
+        //    };
+
+        //    using (var connection = new SqlConnection(CONNECTION_STRING))
+        //    {
+        //        var rows = connection.Insert<User>(user);
+        //        Console.WriteLine(rows + " linhas afetadas");
+
+        //    }
+        //}
+
+        //private static void UpdateUser()
+        //{
+        //    var user = new User()
+        //    {
+        //        Id = 2,
+        //        Bio = "Lucas - Santos",
+        //        Email = "lucasdemello.18@gmail.com",
+        //        Image = "https://...",
+        //        Name = "Lucas Santos",
+        //        PasswordHash = "HASH",
+        //        Slug = "lucas-web"
+        //    };
+
+        //    using (var connection = new SqlConnection(CONNECTION_STRING))
+        //    {
+        //        var rows = connection.Update<User>(user);
+        //        Console.WriteLine(rows + " linhas afetadas");
+
+        //    }
+        //}
+
+        //private static void DeleteUser()
+        //{            
+        //    using (var connection = new SqlConnection(CONNECTION_STRING))
+        //    {
+        //        var user = connection.Get<User>(2);
+        //        var rows = connection.Delete<User>(user);
+        //        Console.WriteLine(rows + " linhas afetadas");
+
+        //    }
+        //}
     }    
 }
