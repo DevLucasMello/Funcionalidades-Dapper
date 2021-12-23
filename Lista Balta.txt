@@ -1,0 +1,8 @@
+Lista Balta:
+
+- Listar os usuários (Nome, Email e perfis separados por vírgula);
+- Listar categorias com quantidade de posts;
+- Listar tags com quantidade de posts;
+- Listar os posts de uma categoria;
+- Listar todos os posts com sua categoria;
+- Listar os posts com suas tags (separados por vírgula).

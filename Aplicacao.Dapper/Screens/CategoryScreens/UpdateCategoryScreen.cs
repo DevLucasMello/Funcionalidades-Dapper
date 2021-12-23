@@ -2,38 +2,38 @@
 using Aplicacao.Dapper.Repositories;
 using System;
 
-namespace Aplicacao.Dapper.Screens.TagScreens
+namespace Aplicacao.Dapper.Screens.CategoryScreens
 {
-    public static class UpdateTagScreen
+    public static class UpdateCategoryScreen
     {
         public static void Load()
         {
             Console.Clear();
-            Console.WriteLine("Atualizando uma tag");
+            Console.WriteLine("Atualizando uma categoria");
             Console.WriteLine("-----------------");
             Console.Write("Id: ");
             var id = Console.ReadLine();
             Console.Write("Name: ");
-            var name = Console.ReadLine();
+            var name = Console.ReadLine();            
             Console.Write("Slug: ");
             var slug = Console.ReadLine();
-            Update(new Tag { Id = int.Parse(id), Name = name, Slug = slug });
+            Update(new Category { Id = int.Parse(id), Name = name, Slug = slug });
             Console.ReadKey();
-            MenuTagScreen.Load();
+            MenuCategoryScreen.Load();
         }
 
-        private static void Update(Tag tag)
+        private static void Update(Category category)
         {
             try
             {
-                var repository = new Repository<Tag>(Database.Connection);
-                repository.Update(tag);
+                var repository = new Repository<Category>(Database.Connection);
+                repository.Update(category);
                 Console.WriteLine();
-                Console.WriteLine("Tag atualizada com sucesso!");
+                Console.WriteLine("Categoria atualizada com sucesso!");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Não foi possível atualizar a Tag");
+                Console.WriteLine("Não foi possível atualizar a Categoria");
                 Console.WriteLine(ex.Message);
             }
         }

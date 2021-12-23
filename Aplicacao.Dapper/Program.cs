@@ -1,90 +1,133 @@
-﻿using Aplicacao.Dapper.Models;
-using Aplicacao.Dapper.Repositories;
+﻿using Aplicacao.Dapper.Screens.CategoryScreens;
+using Aplicacao.Dapper.Screens.PostScreens;
+using Aplicacao.Dapper.Screens.PostTagScreens;
+using Aplicacao.Dapper.Screens.RoleScreens;
+using Aplicacao.Dapper.Screens.TagScreens;
+using Aplicacao.Dapper.Screens.UserRoleScreens;
+using Aplicacao.Dapper.Screens.UserScreens;
 using System;
-using System.Data.SqlClient;
 
 namespace Aplicacao.Dapper
 {
-    class Program
-    {
-        private const string CONNECTION_STRING = "Server=localhost;Database=Blog;User ID=sa; Password=Lm@18792;Trusted_Connection=True;MultipleActiveResultSets=true";
+    public class Program
+    {        
         static void Main(string[] args)
         {
-            var connection = new SqlConnection(CONNECTION_STRING);
-            connection.Open();
-            
-            ReadUsers(connection);
-            ReadRoles(connection);
-            ReadTag(connection);
+            //var connection = new SqlConnection(CONNECTION_STRING);
+            //connection.Open();
+            //ReadUsers(connection);
+            //CreateUser(connection);
+            //ReadRoles(connection);
+            //ReadTag(connection);
             //ReadUser();
             //CreateUser();
             //UpdateUser();
             //DeleteUser();
-
-            connection.Close();
-
-            //var connection = new SqlConnection(CONNECTION_STRING);
-            //connection.Open();
-
-            //Load();
-
-            //Console.ReadKey();
+            //ReadUsers(connection);
             //connection.Close();
+            
+            Database.Connection.Open();
+
+            Load();
+
+            Console.ReadKey();
+            Database.Connection.Close();
         }
 
-        //private static void Load()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("Meu Blog");
-        //    Console.WriteLine("-----------------");
-        //    Console.WriteLine("O que deseja fazer?");
-        //    Console.WriteLine();
-        //    Console.WriteLine("1 - Gestão de usuário");
-        //    Console.WriteLine("2 - Gestão de perfil");
-        //    Console.WriteLine("3 - Gestão de categoria");
-        //    Console.WriteLine("4 - Gestão de tag");
-        //    Console.WriteLine("5 - Vincular perfil/usuário");
-        //    Console.WriteLine("6 - Vincular post/tag");
-        //    Console.WriteLine("7 - Relatórios");
-        //    Console.WriteLine();
-        //    Console.WriteLine();
-        //    var option = short.Parse(Console.ReadLine()!);
+        public static void Load()
+        {
+            Console.Clear();
+            Console.WriteLine("Meu Blog");
+            Console.WriteLine("-----------------");
+            Console.WriteLine("O que deseja fazer?");
+            Console.WriteLine();
+            Console.WriteLine("1 - Gestão de usuário");
+            Console.WriteLine("2 - Gestão de perfil");
+            Console.WriteLine("3 - Gestão de categoria");
+            Console.WriteLine("4 - Gestão de tag");
+            Console.WriteLine("5 - Gestão de post");
+            Console.WriteLine("6 - Vincular perfil/usuário");
+            Console.WriteLine("7 - Vincular post/tag");
+            Console.WriteLine("8 - Relatórios");
+            Console.WriteLine();
+            Console.WriteLine();
+            var option = short.Parse(Console.ReadLine()!);
 
-        //    switch (option)
+            switch (option)
+            {
+                case 1:
+                    MenuUserScreen.Load();
+                    break;
+                case 2:
+                    MenuRoleScreen.Load();
+                    break;
+                case 3:
+                    MenuCategoryScreen.Load();
+                    break;
+                case 4:
+                    MenuTagScreen.Load();
+                    break;
+                case 5:
+                    MenuPostScreen.Load();
+                    break;
+                case 6:
+                    MenuUserRoleScreen.Load();
+                    break;
+                case 7:
+                    MenuPostTagScreen.Load();
+                    break;
+                default: Load(); break;
+            }
+        }
+
+        //private static void ReadUsers(SqlConnection connection) 
+        //{
+        //    var repository = new UserRepository(connection);
+        //    var items = repository.ReadWithRole();
+
+        //    foreach (var item in items) 
         //    {
-        //        case 4:
-        //            MenuTagScreen.Load();
-        //            break;
-        //        default: Load(); break;
+        //        Console.Write(item.Name);
+        //        foreach (var role in item.Roles)
+        //        {
+        //            Console.WriteLine($" - {role?.Name}");
+        //        }
         //    }
         //}
 
-        private static void ReadUsers(SqlConnection connection) 
-        {
-            var repository = new Repository<User>(connection);
-            var items = repository.Get();
-           
-            foreach (var item in items)            
-                Console.WriteLine(item.Name);           
-        }
+        //private static void CreateUser(SqlConnection connection)
+        //{
+        //    var user = new User()
+        //    {
+        //        Bio = "Lucas Santos",
+        //        Email = "lucasdemello.18@gmail.com",
+        //        Image = "https://...",
+        //        Name = "Lucas Santos",
+        //        PasswordHash = "HASH",
+        //        Slug = "lucas-web"
+        //    };
 
-        private static void ReadRoles(SqlConnection connection)
-        {
-            var repository = new Repository<Role>(connection);
-            var items = repository.Get();
+        //    var repository = new Repository<User>(connection);
+        //    repository.Create(user);            
+        //}
 
-            foreach (var item in items)
-                Console.WriteLine(item.Name);
-        }
+        //private static void ReadRoles(SqlConnection connection)
+        //{
+        //    var repository = new Repository<Role>(connection);
+        //    var items = repository.Get();
 
-        private static void ReadTag(SqlConnection connection)
-        {
-            var repository = new Repository<Tag>(connection);
-            var items = repository.Get();
+        //    foreach (var item in items)
+        //        Console.WriteLine(item.Name);
+        //}
 
-            foreach (var item in items)
-                Console.WriteLine(item.Name);
-        }
+        //private static void ReadTag(SqlConnection connection)
+        //{
+        //    var repository = new Repository<Tag>(connection);
+        //    var items = repository.Get();
+
+        //    foreach (var item in items)
+        //        Console.WriteLine(item.Name);
+        //}
 
         //private static void ReadUser()
         //{

@@ -94,4 +94,14 @@
 --	[Tag]
 --	VALUES ('Back-End', '.NET')
 
-select * from [Tag]
+select * from [User]
+
+select * from [Role]
+
+select * from [UserRole]
+
+select * from [Category]
+
+select * from [Post]
+
+select * from [PostTag]

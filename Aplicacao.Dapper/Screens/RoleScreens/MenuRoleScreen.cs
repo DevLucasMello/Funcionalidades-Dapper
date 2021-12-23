@@ -1,20 +1,20 @@
 ﻿using System;
 
-namespace Aplicacao.Dapper.Screens.TagScreens
+namespace Aplicacao.Dapper.Screens.RoleScreens
 {
-    public static class MenuTagScreen
+    public static class MenuRoleScreen
     {
         public static void Load()
         {
             Console.Clear();
-            Console.WriteLine("Gestão de tags");
+            Console.WriteLine("Gestão de perfis");
             Console.WriteLine("-----------------");
             Console.WriteLine("O que deseja fazer?");
             Console.WriteLine();
-            Console.WriteLine("1 - Listar tags");
-            Console.WriteLine("2 - Cadastrar tag");
-            Console.WriteLine("3 - Atualizar tag");
-            Console.WriteLine("4 - Excluir tag");
+            Console.WriteLine("1 - Listar perfil");
+            Console.WriteLine("2 - Cadastrar perfil");
+            Console.WriteLine("3 - Atualizar perfil");
+            Console.WriteLine("4 - Excluir perfil");
             Console.WriteLine("5 - Voltar ao menu principal");
             Console.WriteLine();
             Console.WriteLine();
@@ -23,16 +23,16 @@ namespace Aplicacao.Dapper.Screens.TagScreens
             switch (option)
             {
                 case 1:
-                    ListTagScreen.Load();
+                    ListRoleScreen.Load();
                     break;
                 case 2:
-                    CreateTagScreen.Load();
+                    CreateRoleScreen.Load();
                     break;
                 case 3:
-                    UpdateTagScreen.Load();
+                    UpdateRoleScreen.Load();
                     break;
                 case 4:
-                    DeleteTagScreen.Load();
+                    DeleteRoleScreen.Load();
                     break;
                 case 5:
                     Program.Load();

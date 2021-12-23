@@ -2,36 +2,36 @@
 using Aplicacao.Dapper.Repositories;
 using System;
 
-namespace Aplicacao.Dapper.Screens.TagScreens
+namespace Aplicacao.Dapper.Screens.RoleScreens
 {
-    public static class CreateTagScreen
+    public static class CreateRoleScreen
     {
         public static void Load()
         {
             Console.Clear();
-            Console.WriteLine("Nova tag");
+            Console.WriteLine("Novo perfil");
             Console.WriteLine("-----------------");
             Console.Write("Name: ");
-            var name = Console.ReadLine();
+            var name = Console.ReadLine();            
             Console.Write("Slug: ");
             var slug = Console.ReadLine();
-            Create(new Tag { Name = name, Slug = slug});
+            Create(new Role { Name = name, Slug = slug});
             Console.ReadKey();
-            MenuTagScreen.Load();
+            MenuRoleScreen.Load();
         }
 
-        private static void Create(Tag tag)
+        private static void Create(Role role)
         {
             try
             {
-                var repository = new Repository<Tag>(Database.Connection);
-                repository.Create(tag);
+                var repository = new Repository<Role>(Database.Connection);
+                repository.Create(role);
                 Console.WriteLine();
-                Console.WriteLine("Tag cadastrada com sucesso!");
+                Console.WriteLine("Perfil cadastrado com sucesso!");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Não foi possível salvar a Tag");
+                Console.WriteLine("Não foi possível salvar o Perfil");
                 Console.WriteLine(ex.Message);
             }
         }

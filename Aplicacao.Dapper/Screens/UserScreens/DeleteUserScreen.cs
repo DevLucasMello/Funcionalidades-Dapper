@@ -2,34 +2,34 @@
 using Aplicacao.Dapper.Repositories;
 using System;
 
-namespace Aplicacao.Dapper.Screens.TagScreens
+namespace Aplicacao.Dapper.Screens.UserScreens
 {
-    public static class DeleteTagScreen
+    public static class DeleteUserScreen
     {
         public static void Load()
         {
             Console.Clear();
-            Console.WriteLine("Excluir uma tag");
+            Console.WriteLine("Excluir um user");
             Console.WriteLine("-----------------");
-            Console.Write("Qual o Id da tag que deseja excluir: ");
+            Console.Write("Qual o Id do user que deseja excluir: ");
             var id = Console.ReadLine();           
             Delete(int.Parse(id));
             Console.ReadKey();
-            MenuTagScreen.Load();
+            MenuUserScreen.Load();
         }
 
         private static void Delete(int id)
         {
             try
             {
-                var repository = new Repository<Tag>(Database.Connection);
+                var repository = new Repository<User>(Database.Connection);
                 repository.Delete(id);
                 Console.WriteLine();
-                Console.WriteLine("Tag excluída com sucesso!");
+                Console.WriteLine("User excluída com sucesso!");
             }
             catch (Exception ex)
             {
-                Console.WriteLine("Não foi possível excluir a Tag");
+                Console.WriteLine("Não foi possível excluir o User");
                 Console.WriteLine(ex.Message);
             }
         }
