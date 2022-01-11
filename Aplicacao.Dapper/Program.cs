@@ -1,4 +1,5 @@
 ﻿using Aplicacao.Dapper.Screens.CategoryScreens;
+using Aplicacao.Dapper.Screens.RelatorioScreen;
 using Aplicacao.Dapper.Screens.PostScreens;
 using Aplicacao.Dapper.Screens.PostTagScreens;
 using Aplicacao.Dapper.Screens.RoleScreens;
@@ -75,6 +76,9 @@ namespace Aplicacao.Dapper
                     break;
                 case 7:
                     MenuPostTagScreen.Load();
+                    break;
+                case 8:
+                    RelatorioScreen.Load();
                     break;
                 default: Load(); break;
             }
